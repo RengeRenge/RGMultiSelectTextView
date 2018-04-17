@@ -53,6 +53,9 @@
         self.currentSelectedIndex = -1;
         
         self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:[[RGMultiSelectCollectionViewLeftAlignedLayout alloc] init]];
+        if (@available(iOS 11.0, *)) {
+            self.collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
         self.collectionView.backgroundColor = [UIColor clearColor];
         self.collectionView.delegate = self;
         self.collectionView.dataSource  = self;

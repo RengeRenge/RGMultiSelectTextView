@@ -743,9 +743,11 @@
                 }
             }];
         }];
-        
-        [self.collectionView reloadItemsAtIndexPaths:indexPaths];
-        [self scrollViewDidScroll:self.collectionView];
+        [self collectionViewUpdate:^{
+            [self.collectionView reloadItemsAtIndexPaths:indexPaths];
+        } completion:^{
+            [self scrollViewDidScroll:self.collectionView];
+        }];
     };
     
     if ([NSThread isMainThread]) {

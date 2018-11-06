@@ -63,7 +63,7 @@
         [self.collectionView registerClass:[RGMTTextFiledCell class] forCellWithReuseIdentifier:[RGMTTextFiledCell identifier]];
         
         _bottomLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
-        _bottomLine.backgroundColor = RGMTCommenUtils.normalBackgroundColor;
+        self.separatorColor = RGMTCommenUtils.normalBackgroundColor;
         
         [self addSubview:self.collectionView];
         [self addSubview:self.textField];
@@ -106,12 +106,10 @@
     _titleNormalColor = titleNormalColor;
     [self.textField configWithMultiSelectView:self];
     [self.collectionView reloadData];
-    _bottomLine.backgroundColor = titleNormalColor;
 }
 
 - (void)setTitleSelectedColor:(UIColor *)titleSelectedColor {
     _titleSelectedColor = titleSelectedColor;
-    _bottomLine.backgroundColor = titleSelectedColor;
     [self.textField configWithMultiSelectView:self];
     [self.collectionView reloadData];
 }
@@ -126,6 +124,15 @@
     _titleSelectedBackgroudColor = titleSelectedBackgroudColor;
     [self.textField configWithMultiSelectView:self];
     [self.collectionView reloadData];
+}
+
+- (void)setSeparatorColor:(UIColor *)separatorColor {
+    _separatorColor = separatorColor;
+    _bottomLine.backgroundColor = separatorColor;
+}
+
+- (void)setReturnKeyType:(UIReturnKeyType)returnKeyType {
+    self.textField.returnKeyType = returnKeyType;
 }
 
 - (void)setFont:(UIFont *)font {
@@ -411,7 +418,7 @@
     }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField reason:(UITextFieldDidEndEditingReason)reason {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     [self hideKeyBoard];
     if (self.delegate && [self.delegate respondsToSelector:@selector(multiSelectTextViewDidEndEditing:)]) {
         [self.delegate multiSelectTextViewDidEndEditing:self];
@@ -651,7 +658,7 @@
         if (!self.placeHoderOnTextField && (self.placeHoder || self.attributePlaceHoder)) {
             [titlesArray insertObject:self.titlesArray.firstObject atIndex:0];
         }
-        _titlesArray = titlesArray;
+        self->_titlesArray = titlesArray;
         [self.collectionView reloadData];
         self.placeHoderOnTextField = self.placeHoderOnTextField;
     };

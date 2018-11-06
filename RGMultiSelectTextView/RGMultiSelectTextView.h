@@ -16,16 +16,20 @@
 
 @property (nonatomic, weak) id<RGMultiSelectTextViewDelegate> delegate;
 
-@property (nonatomic, strong) UIColor *titleNormalColor;
-@property (nonatomic, strong) UIColor *titleSelectedColor;
+@property (nonatomic, copy) UIColor *titleNormalColor;
+@property (nonatomic, copy) UIColor *titleSelectedColor;
 
-@property (nonatomic, strong) UIColor *titleNormalBackgroudColor;
-@property (nonatomic, strong) UIColor *titleSelectedBackgroudColor;
+@property (nonatomic, copy) UIColor *titleNormalBackgroudColor;
+@property (nonatomic, copy) UIColor *titleSelectedBackgroudColor;
+
+@property (nonatomic, copy) UIColor *separatorColor;
 
 @property (nonatomic, assign) BOOL placeHoderOnTextField;
 
 @property (nonatomic, copy) NSString *placeHoder;
 @property (nonatomic, copy) NSAttributedString *attributePlaceHoder;
+
+@property (nonatomic, assign) UIReturnKeyType returnKeyType; // default is UIReturnKeyDone (See note under UIReturnKeyType enum)
 
 @property (nonatomic, copy) NSString *text;
 

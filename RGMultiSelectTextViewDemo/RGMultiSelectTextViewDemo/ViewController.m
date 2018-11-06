@@ -27,14 +27,22 @@
     _multiSelectTextView.titleLineSpacing = 5.0f;
     _multiSelectTextView.edgeInsets = UIEdgeInsetsMake(12, 15, 12, 15);
     
-    _multiSelectTextView.placeHoderOnTextField = YES;
+    _multiSelectTextView.returnKeyType = UIReturnKeySearch;
     
-    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@" にゃんぱすー" attributes:@{NSFontAttributeName : _multiSelectTextView.font}];
+    _multiSelectTextView.placeHoderOnTextField = NO;
+    _multiSelectTextView.titleNormalColor = [UIColor blackColor];
+    _multiSelectTextView.titleSelectedColor = [UIColor whiteColor];
+    _multiSelectTextView.titleNormalBackgroudColor = [UIColor lightGrayColor];
+    _multiSelectTextView.titleSelectedBackgroudColor = [UIColor blackColor];
+    
+    NSMutableAttributedString *att = [[NSMutableAttributedString alloc] initWithString:@" にゃんぱすー" attributes:@{NSFontAttributeName : _multiSelectTextView.font, NSForegroundColorAttributeName:[UIColor lightGrayColor]}];
     NSTextAttachment *icon = [[NSTextAttachment alloc] init];
     icon.image = [UIImage imageNamed:@"Renge"];
     
     if (_multiSelectTextView.placeHoderOnTextField) {
         icon.bounds = CGRectMake(0, 0, 30.f, 30.f);
+    } else {
+        icon.bounds = CGRectMake(0, 0, 25.f, 25.f);
     }
     [att replaceCharactersInRange:NSMakeRange(0, 0) withAttributedString:[NSAttributedString attributedStringWithAttachment:icon]];
     
@@ -76,7 +84,7 @@
     NSLog(@"%f", contentSize.height);
     CGRect frame = self.view.bounds;
     frame.origin.y = 44.f;
-    frame.size.height = contentSize.height;
+    frame.size.height = MIN(contentSize.height, 180);
     multiSelectTextView.frame = frame;
 }
 

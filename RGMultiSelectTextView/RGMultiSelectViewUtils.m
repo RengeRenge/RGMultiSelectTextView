@@ -175,7 +175,8 @@
 
 @property (nonatomic, assign) BOOL observer;
 
-@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *selectedBackgroundColor;
+@property (nonatomic, strong) UIColor *normalTitleColor;
 
 @end
 
@@ -211,8 +212,8 @@
 
 - (void)configWithMultiSelectView:(RGMultiSelectTextView *)multiSelectTextView {
     self.defaultTextAttributes = [RGMTCommenUtils attributes:multiSelectTextView];
-    self.color = multiSelectTextView.titleSelectedBackgroudColor;
-    self.cursorHide = self.cursorHide;
+    self.selectedBackgroundColor = multiSelectTextView.titleSelectedBackgroudColor;
+    self.normalTitleColor = multiSelectTextView.titleNormalColor;
 }
 
 - (void)textDidChange {
@@ -239,11 +240,16 @@
     [super deleteBackward];
 }
 
+- (void)setNormalTitleColor:(UIColor *)normalTitleColor {
+    _normalTitleColor = normalTitleColor;
+    self.cursorHide = self.cursorHide;
+}
+
 - (void)setCursorHide:(BOOL)cursorHide {
     if (cursorHide) {
         self.tintColor = [UIColor clearColor];
     } else {
-        self.tintColor = _color ? _color : [RGMTCommenUtils selectedBackgroundColor];
+        self.tintColor = _normalTitleColor ? _normalTitleColor : [RGMTCommenUtils normalTitleColor];
     }
     _cursorHide = cursorHide;
 }
